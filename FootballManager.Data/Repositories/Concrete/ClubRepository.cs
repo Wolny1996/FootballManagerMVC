@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootballManager.Data.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace FootballManager.Data.Repositories.Concrete
 {
@@ -21,13 +23,24 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<Club> GetSpecificClub(string clubName)
         {
-            var searchedClub = await _context.Clubs
+            var query = _context.Clubs
                 .Include(c => c.Stadium)
                 .Include(c => c.Coach)
                 .Include(c => c.Footballers)
                 .Include(c => c.ClubTournaments)
-                .ThenInclude(ct => ct.Tournaments)
-                .FirstOrDefaultAsync(c => c.ClubName == clubName);
+                .ThenInclude(ct => ct.Tournaments);
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var searchedClub = await policy.ExecuteAsync(() => query.FirstOrDefaultAsync(c => c.ClubName == clubName));
 
             if (searchedClub == null)
             {
@@ -41,13 +54,24 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<IEnumerable<Club>> GetAllClubs()
         {
-            var clubs = await _context.Clubs
+            var query = _context.Clubs
                 .Include(c => c.Stadium)
                 .Include(c => c.Coach)
                 .Include(c => c.Footballers)
                 .Include(c => c.ClubTournaments)
-                .ThenInclude(ct => ct.Tournaments)
-                .ToListAsync();
+                .ThenInclude(ct => ct.Tournaments);
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var clubs = await policy.ExecuteAsync(() => query.ToListAsync());
 
             if (clubs == null)
             {
@@ -61,7 +85,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PutExistingClub(string clubName, Club updatedClub)
         {
-            var existingClub = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == clubName);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingClub = await policy.ExecuteAsync(() =>
+                _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == clubName));
 
             if (existingClub == null)
             {
@@ -79,13 +114,34 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PostNewClub(Club newClub)
         {
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
             _context.Clubs.Add(newClub);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteSpecificClub(string clubName)
         {
-            var existingClub = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == clubName);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingClub = await policy.ExecuteAsync(() =>
+                _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == clubName));
 
             if (existingClub == null)
             {

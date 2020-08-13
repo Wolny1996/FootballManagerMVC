@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FootballManager.Data.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace FootballManager.Data.Repositories.Concrete
 {
@@ -20,9 +22,20 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<Stadium> GetSpecificStadium(string stadiumName)
         {
-            var searchedStadium = await _context.Stadiums
-                    .Include(s => s.Club)
-                    .FirstOrDefaultAsync(s => s.StadiumName == stadiumName);
+            var query = _context.Stadiums
+                    .Include(s => s.Club);
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var searchedStadium = await policy.ExecuteAsync(() => query.FirstOrDefaultAsync(s => s.StadiumName == stadiumName));
 
             if (searchedStadium == null)
             {
@@ -36,10 +49,21 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<IEnumerable<Stadium>> GetAllStadiums()
         {
-            var stadiums = await _context.Stadiums
+            var query = _context.Stadiums
                 .Include(s => s.Club)
-                .AsNoTracking()
-                .ToListAsync();
+                .AsNoTracking();
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var stadiums = await policy.ExecuteAsync(() => query.ToListAsync());
 
             if (stadiums == null)
             {
@@ -53,7 +77,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PutExistingStadium(string stadiumName, string stadiumClub, Stadium updatedStadium)
         {
-            var existingStadium = await _context.Stadiums.FirstOrDefaultAsync(s => s.StadiumName == stadiumName);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingStadium = await policy.ExecuteAsync(() =>
+                _context.Stadiums.FirstOrDefaultAsync(s => s.StadiumName == stadiumName));
 
             if (existingStadium == null)
             {
@@ -80,7 +115,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PostNewStadium(string addedStadiumClub, Stadium newStadium)
         {
-            var existingClub = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == addedStadiumClub);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingClub = await policy.ExecuteAsync(() =>
+                _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == addedStadiumClub));
 
             if (existingClub == null)
             {
@@ -96,7 +142,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task DeleteSpecificStadium(string stadiumName)
         {
-            var existingStadium = await _context.Stadiums.FirstOrDefaultAsync(s => s.StadiumName == stadiumName);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+            {
+                _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+            });
+
+            var existingStadium = await policy.ExecuteAsync(() =>
+                _context.Stadiums.FirstOrDefaultAsync(s => s.StadiumName == stadiumName));
 
             if (existingStadium == null)
             {

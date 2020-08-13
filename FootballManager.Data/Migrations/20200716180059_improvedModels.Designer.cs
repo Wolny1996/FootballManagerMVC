@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FootballManager.API.Migrations
+namespace FootballManager.Data.Migrations
 {
     [DbContext(typeof(FootballManagerContext))]
     [Migration("20200716180059_improvedModels")]

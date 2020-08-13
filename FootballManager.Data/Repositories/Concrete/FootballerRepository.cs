@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootballManager.Data.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace FootballManager.Data.Repositories.Concrete
 {
@@ -21,9 +23,20 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<Footballer> GetSpecificFootballer(string footballerSurname)
         {
-            var searchedFootballer = await _context.Footballers
-                    .Include(f => f.Club)
-                    .FirstOrDefaultAsync(f => f.Surname == footballerSurname);
+            var query = _context.Footballers
+                    .Include(f => f.Club);
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var searchedFootballer = await policy.ExecuteAsync(() => query.FirstOrDefaultAsync(f => f.Surname == footballerSurname));
 
             if (searchedFootballer == null)
             {
@@ -37,10 +50,21 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task<IEnumerable<Footballer>> GetAllFootballers()
         {
-            var footballers = await _context.Footballers
+            var query = _context.Footballers
                 .Include(f => f.Club)
-                .AsNoTracking()
-                .ToListAsync();
+                .AsNoTracking();
+
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+            {
+                _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+            });
+
+            var footballers = await policy.ExecuteAsync(() => query.ToListAsync());
 
             if (footballers == null)
             {
@@ -54,7 +78,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PutExistingFootballer(string footballerSurname, string footballerCurrentClub, Footballer updatedFootballer)
         {
-            var existingFootballer = await _context.Footballers.FirstOrDefaultAsync(f => f.Surname == footballerSurname);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingFootballer = await policy.ExecuteAsync(() =>
+                _context.Footballers.FirstOrDefaultAsync(f => f.Surname == footballerSurname));
 
             if (existingFootballer == null)
             {
@@ -82,7 +117,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task PostNewFootballer(string addedFootballerCurrentClub, Footballer newFootballer)
         {
-            var existingClub = await _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == addedFootballerCurrentClub);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+            {
+                _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+            });
+
+            var existingClub = await policy.ExecuteAsync(() =>
+                _context.Clubs.FirstOrDefaultAsync(c => c.ClubName == addedFootballerCurrentClub));
 
             if (existingClub == null)
             {
@@ -98,7 +144,18 @@ namespace FootballManager.Data.Repositories.Concrete
 
         public async Task DeleteSpecificFootballer(string footballerSurname)
         {
-            var existingFootballer = await _context.Footballers.FirstOrDefaultAsync(f => f.Surname == footballerSurname);
+            var policy = Policy.Handle<SqlException>().WaitAndRetryAsync(new[]
+            {
+                TimeSpan.FromSeconds(5),
+                TimeSpan.FromSeconds(10),
+                TimeSpan.FromSeconds(15),
+            }, (ext, timeSpan, retryCount, context) =>
+                {
+                    _logger.LogError(ext, $"Error - try retry (count: {retryCount}, timeSpan: {timeSpan})");
+                });
+
+            var existingFootballer = await policy.ExecuteAsync(() =>
+                _context.Footballers.FirstOrDefaultAsync(f => f.Surname == footballerSurname));
 
             if (existingFootballer == null)
             {

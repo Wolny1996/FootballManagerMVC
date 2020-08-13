@@ -17,7 +17,7 @@ namespace FootballManager.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Club", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Club", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,9 +30,6 @@ namespace FootballManager.Data.Migrations
                     b.Property<string>("ClubName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CoachId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Founded")
                         .HasColumnType("datetime2");
 
@@ -41,7 +38,7 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("Clubs");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.ClubTournament", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.ClubTournament", b =>
                 {
                     b.Property<int>("ClubId")
                         .HasColumnType("int");
@@ -56,7 +53,7 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("ClubTournament");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Coach", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Coach", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,17 +71,20 @@ namespace FootballManager.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClubId")
+                        .IsUnique();
+
                     b.ToTable("Coaches");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Footballer", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Footballer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClubId")
+                    b.Property<int>("ClubId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -100,27 +100,7 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("Footballers");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.PitchPosition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("FootballerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FootballerId");
-
-                    b.ToTable("PitchPositions");
-                });
-
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Stadium", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Stadium", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -138,10 +118,13 @@ namespace FootballManager.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClubId")
+                        .IsUnique();
+
                     b.ToTable("Stadiums");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Tournament", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Tournament", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,33 +139,46 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("Tournaments");
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.ClubTournament", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.ClubTournament", b =>
                 {
-                    b.HasOne("FootballManagerASP_NETCore3_1.Domain.Club", "Club")
-                        .WithMany()
+                    b.HasOne("FootballManagerASP_NETCore3_1.API.Club", "Club")
+                        .WithMany("ClubTournament")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FootballManagerASP_NETCore3_1.Domain.Tournament", "Tournament")
-                        .WithMany("ClubTournaments")
+                    b.HasOne("FootballManagerASP_NETCore3_1.API.Tournament", "Tournament")
+                        .WithMany("ClubTournament")
                         .HasForeignKey("TournamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.Footballer", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Coach", b =>
                 {
-                    b.HasOne("FootballManagerASP_NETCore3_1.Domain.Club", "Club")
-                        .WithMany("Footballers")
-                        .HasForeignKey("ClubId");
+                    b.HasOne("FootballManagerASP_NETCore3_1.API.Club", "Club")
+                        .WithOne("Coaches")
+                        .HasForeignKey("FootballManagerASP_NETCore3_1.API.Coach", "ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("FootballManagerASP_NETCore3_1.Domain.PitchPosition", b =>
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Footballer", b =>
                 {
-                    b.HasOne("FootballManagerASP_NETCore3_1.Domain.Footballer", null)
-                        .WithMany("PitchPositions")
-                        .HasForeignKey("FootballerId");
+                    b.HasOne("FootballManagerASP_NETCore3_1.API.Club", "Club")
+                        .WithMany("Footballers")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FootballManagerASP_NETCore3_1.API.Stadium", b =>
+                {
+                    b.HasOne("FootballManagerASP_NETCore3_1.API.Club", "Club")
+                        .WithOne("Stadiums")
+                        .HasForeignKey("FootballManagerASP_NETCore3_1.API.Stadium", "ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
