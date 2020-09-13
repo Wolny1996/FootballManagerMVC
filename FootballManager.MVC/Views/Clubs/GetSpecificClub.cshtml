@@ -1,0 +1,40 @@
+﻿@model ClubResponse
+
+    <!-- Information about a specific club-->
+<article class="club-container">
+    <div id="details-square">
+        <!-- Information about a logo-->
+        <section id="club-details-logo">
+            <img src="@Model.ClubImageUrl" , alt="@Model.ClubName Logo" />
+        </section>
+
+        <!-- General information about a club-->
+        <section id="club-details-informations">
+            <h3>@Model.ClubName</h3>
+            <p><i class="icon-town-hall"></i>@Model.City</p>
+            <p><i class="icon-calendar"></i>@Model.Founded</>
+            <p><i class="icon-birthday"></i>@Model.Age</p>
+            <p><i class="icon-user"></i>@Model.Coach.FullName</p>
+        </section>
+    </div>
+
+    <!-- Information about a squad-->
+    <section id="club-squad">
+        @foreach (var f in Model.Footballers)
+        {
+            <p><i class="icon-soccer-ball"></i>@f</p>
+        }
+    </section>
+    <div style="clear:both"></div>
+
+    <!-- Information about a stadium-->
+    <section style="background-image: url(@Model.Stadium.StadiumImageUrl); background-size: cover;" id="club-stadium"></section>
+    <section id="club-stadium-informations">
+        <div class="stadium-rectangle">
+            <p><i class="icon-home"></i>@Model.Stadium.StadiumName</p>
+        </div>
+        <div class="stadium-rectangle">
+            <p><i class="icon-users"></i>@Model.Stadium.Capacity</p>
+        </div>
+    </section>
+</article>

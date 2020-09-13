@@ -1,6 +1,5 @@
 ﻿using FootballManager.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FootballManager.Data
 {
@@ -15,30 +14,13 @@ namespace FootballManager.Data
         {
         }
 
-        public virtual DbSet<ClubTournament> ClubTournament { get; set; }
         public virtual DbSet<Club> Clubs { get; set; }
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<Footballer> Footballers { get; set; }
         public virtual DbSet<Stadium> Stadiums { get; set; }
-        public virtual DbSet<Tournament> Tournaments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ClubTournament>(entity =>
-            {
-                entity.HasKey(e => new { e.ClubId, e.TournamentId });
-
-                entity.HasIndex(e => e.TournamentId);
-
-                entity.HasOne(d => d.Clubs)
-                    .WithMany(p => p.ClubTournaments)
-                    .HasForeignKey(d => d.ClubId);
-
-                entity.HasOne(d => d.Tournaments)
-                    .WithMany(p => p.ClubTournament)
-                    .HasForeignKey(d => d.TournamentId);
-            });
-
             modelBuilder.Entity<Coach>(entity =>
             {
                 entity.HasIndex(e => e.ClubId)

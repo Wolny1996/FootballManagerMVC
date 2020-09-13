@@ -1,0 +1,295 @@
+﻿/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0 !important;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url(../Images/Background.png) !important; /*photo from: */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom left !important;
+}
+
+#nav-container {
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-menu {
+    width: 85%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+    #nav-menu > ol {
+        width: 100%;
+        height: 40px;
+        margin: 10px 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #fff;
+    }
+
+        #nav-menu > ol a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+            #nav-menu > ol a:hover {
+                color: #000;
+            }
+
+        #nav-menu > ol > li {
+            width: 200px;
+            float: left;
+            margin: 0;
+            margin-left: 5px;
+            padding: 10px 0;
+            background-color: #333;
+        }
+
+#nav-socials {
+    width: 15%;
+    height: 60px;
+    float: left;
+}
+
+.gh {
+    width: 50px;
+    height: 60px;
+    float: right;
+}
+
+    .gh:hover {
+        background-color: #333;
+    }
+
+.ld {
+    width: 50px;
+    height: 60px;
+    float: right;
+}
+
+    .ld:hover {
+        background-color: #2867B2;
+    }
+
+.gm {
+    width: 50px;
+    height: 60px;
+    float: right;
+}
+
+    .gm:hover {
+        background-color: #DB4437;
+    }
+
+.social-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    width: 50px;
+    height: 60px;
+}
+
+#wrapper {
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#middle {
+    width: 500px;
+    height: 500px;
+    margin: 50px auto;
+    padding: 0;
+    float: left;
+    background-color: #333;
+    border-radius: 10px;
+}
+
+#left {
+    width: 250px;
+    height: 520px;
+    margin: 40px auto;
+    padding: 0;
+    float: left;
+    background-image: url(../Images/PremierLeagueTrophy.jpg); /*photo from: https://commons.wikimedia.org/wiki/File:Trophée_Premier_League_13-14.jpg*/
+    background-size: auto 520px;
+    background-repeat: no-repeat;
+    /*    background-position-x: -425px;*/
+    background-position-x: -50px;
+    background-color: #000;
+    border-radius: 10px;
+    transform: perspective(500px) rotateY(10deg);
+}
+
+#right {
+    width: 250px;
+    height: 520px;
+    margin: 40px auto;
+    padding: 0;
+    background-color: firebrick;
+    float: left;
+    background-image: url(../Images/PremierLeagueBall.jpg); /*photo from: https://pixabay.com/pl/photos/piłki-piłkarz-premier-league-3597192/*/
+    background-size: auto 520px;
+    background-repeat: no-repeat;
+    background-position-x: -275px;
+    background-color: #000;
+    border-radius: 10px;
+    transform: perspective(500px) rotateY(-10deg);
+}
+
+#carousel-container {
+    width: 500px;
+    height: 500px;
+}
+
+.carousel-inner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 300px !important;
+}
+
+#clubs-thumbnails-container {
+    width: 480px;
+    height: 480px;
+    margin: 10px;
+}
+
+.club-thumbnail {
+    width: 100px;
+    height: 85px;
+    float: left;
+}
+
+    .club-thumbnail:hover {
+        transform: scale(1.2);
+    }
+
+    .club-thumbnail img {
+        height: 85px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .club-thumbnail h5 {
+        text-align: center;
+        color: #fff;
+    }
+
+    .club-thumbnail a {
+        text-decoration: none !important;
+    }
+
+.club-container {
+    width: 480px;
+    height: 480px;
+    margin: 10px;
+}
+
+#details-square {
+    width: 230px;
+    height: 294px;
+    margin: 0px 5px 5px 0px;
+    float: left;
+}
+
+#club-details-logo {
+    width: 230px;
+    height: 142px;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #fff;
+    background-color: #000;
+}
+
+    #club-details-logo img {
+        height: 132px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+#club-details-informations {
+    width: 230px;
+    height: 142px;
+    padding: 5px;
+    margin: 10px 0 0 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #fff;
+    background-color: #000;
+    color: #fff;
+}
+
+    #club-details-informations h3 {
+        text-align: center;
+        margin: 5px;
+    }
+
+    #club-details-informations p {
+        margin: 0px;
+    }
+
+#club-squad {
+    width: 240px;
+    height: 294px;
+    padding: 5px;
+    margin: 0px 0px 5px 5px;
+    float: left;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #fff;
+    background-color: #000;
+    color: #fff;
+}
+
+    #club-squad p {
+        margin: 0px;
+        padding: 5px;
+    }
+
+#club-stadium {
+    width: 480px;
+    height: 146px;
+    margin: 5px 0px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 0px 10px 0px #fff;
+    background-color: #000;
+}
+
+#club-stadium-informations {
+    width: 480px;
+    height: 30px;
+    margin: 0px 0px 0px 0px;
+    border-top: 0px;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0px 0px 15px 0px #fff;
+    background-color: #000;
+}
+
+.stadium-rectangle {
+    width: 235px;
+    height: 30px;
+    float: left;
+}
+
+    .stadium-rectangle p {
+        padding: 5px;
+        color: #fff;
+    }

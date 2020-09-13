@@ -1,0 +1,14 @@
+﻿@model ClubsListViewModel
+
+<!-- All club logos in the database-->
+<div id="clubs-thumbnails-container">
+    @foreach (var c in Model.Clubs)
+    {
+        <div class="club-thumbnail">
+            <a asp-controller="Clubs" asp-action="GetSpecificClub" asp-route-clubName="@c.ClubName">
+                <img src="@c.ClubImageUrl" alt="@c.ClubName Logo">
+                <h5>@c.ClubName</h5>
+            </a>
+        </div>
+    }
+</div>
