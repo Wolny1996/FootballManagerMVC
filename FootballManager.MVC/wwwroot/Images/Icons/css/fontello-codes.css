@@ -1,0 +1,12 @@
+
+.icon-calendar:before { content: '\e800'; } /* '' */
+.icon-home:before { content: '\e801'; } /* '' */
+.icon-users:before { content: '\e802'; } /* '' */
+.icon-award:before { content: '\e803'; } /* '' */
+.icon-user:before { content: '\e804'; } /* '' */
+.icon-town-hall:before { content: '\e83c'; } /* '' */
+.icon-github-circled-alt2:before { content: '\f056'; } /* '' */
+.icon-mail-alt:before { content: '\f0e0'; } /* '' */
+.icon-soccer-ball:before { content: '\f1e3'; } /* '' */
+.icon-birthday:before { content: '\f1fd'; } /* '' */
+.icon-linkedin-squared:before { content: '\f30c'; } /* '' */

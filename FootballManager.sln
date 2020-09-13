@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballManager.Data", "FootballManager.Data\FootballManager.Data.csproj", "{CDAEC73F-2277-4974-BD76-C8ADAA5E274A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballManager.API", "FootballManager.API\FootballManager.API.csproj", "{82D23688-47D5-4D34-8C6D-FBA24CDBF883}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{51ABF9C1-4BF7-46B4-B6C5-18B1699C0D34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1A993B5-60FB-4782-A79F-EBDBE55501FC}"
@@ -16,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballManager.MVC", "FootballManager.MVC\FootballManager.MVC.csproj", "{861200F6-1F14-4628-B1BD-740218372E45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{CDAEC73F-2277-4974-BD76-C8ADAA5E274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDAEC73F-2277-4974-BD76-C8ADAA5E274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDAEC73F-2277-4974-BD76-C8ADAA5E274A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82D23688-47D5-4D34-8C6D-FBA24CDBF883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82D23688-47D5-4D34-8C6D-FBA24CDBF883}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82D23688-47D5-4D34-8C6D-FBA24CDBF883}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82D23688-47D5-4D34-8C6D-FBA24CDBF883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861200F6-1F14-4628-B1BD-740218372E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861200F6-1F14-4628-B1BD-740218372E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861200F6-1F14-4628-B1BD-740218372E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861200F6-1F14-4628-B1BD-740218372E45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,7 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E2FFDD56-A649-4C29-B16A-A3D1BFE9998E} = {51ABF9C1-4BF7-46B4-B6C5-18B1699C0D34}
 		{CDAEC73F-2277-4974-BD76-C8ADAA5E274A} = {51ABF9C1-4BF7-46B4-B6C5-18B1699C0D34}
-		{82D23688-47D5-4D34-8C6D-FBA24CDBF883} = {51ABF9C1-4BF7-46B4-B6C5-18B1699C0D34}
+		{861200F6-1F14-4628-B1BD-740218372E45} = {51ABF9C1-4BF7-46B4-B6C5-18B1699C0D34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C666F48-926A-425D-9DBB-7C3A4C73E2CF}

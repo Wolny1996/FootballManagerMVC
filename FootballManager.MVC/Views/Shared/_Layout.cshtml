@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width" />
+    <title>Football Manager</title>
+    <meta name="description" content="Servis about english football clubs" />
+    <meta name="keywords" content="football, club, stadium, footballer, coach, Premier League" />
+    <link href="~/content/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link href="~/Images/Socials-icons/css/fontello.css" rel="stylesheet" type="text/css" />
+    <link href="~/Images/Icons/css/fontello.css" rel="stylesheet" type="text/css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <!-- Navigation menu-->
+    <header>
+        <nav id="nav-container">
+            <div id="nav-menu">
+                <ol>
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Clubs" asp-action="GetAllClubs">Clubs</a></li>
+                </ol>
+            </div>
+
+            <div id="nav-socials">
+                <div class="gm">
+                    <i class="icon-mail-alt"></i>
+                </div>
+                <div class="ld">
+                    <a href="https://www.linkedin.com/in/mateusz-wolny1996/" class="social-link"><i class="icon-linkedin-squared"></i></a>
+                </div>
+                <div class="gh">
+                    <a href="https://github.com/Wolny1996" class="social-link"><i class="icon-github-circled-alt2"></i></a>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content-->
+    <div id="wrapper">
+        <aside id="left"></aside>
+        <div id="middle">
+            <main>
+                @RenderBody()
+            </main>
+        </div>
+        <asside id="right"></asside>
+    </div>
+</body>
+</html>
