@@ -12,14 +12,14 @@
     <div class="carousel-inner">
         <div class="item active">
             <a asp-controller="Clubs" asp-action="GetSpecificClub" asp-route-clubName="@Model.Clubs.FirstOrDefault().ClubName">
-                <img @*class="slide-image"*@ src="@Url.Content(Model.Clubs.FirstOrDefault().ClubImageUrl)" alt="@Model.Clubs.FirstOrDefault().ClubName Logo">
+                <img class="slide-image" src="@Url.Content(Model.Clubs.FirstOrDefault().ClubImageUrl)" alt="@Model.Clubs.FirstOrDefault().ClubName Logo">
             </a>
         </div>
         @foreach (var c in Model.Clubs.Skip(1))
         {
             <div class="item">
                 <a asp-controller="Clubs" asp-action="GetSpecificClub" asp-route-clubName="@c.ClubName">
-                    <img @*class="slide-image"*@ src="@Url.Content(c.ClubImageUrl)" alt="@c.ClubName Logo">
+                    <img class="slide-image" src="@Url.Content(c.ClubImageUrl)" alt="@c.ClubName Logo">
                 </a>
             </div>
         }

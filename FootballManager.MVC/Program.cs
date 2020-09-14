@@ -54,7 +54,7 @@ namespace FootballManager.API
                         //{
                         //    Id = 1,
                         //    ClubName = "Arsenal",
-                        //    ClubImageUrl = "https://pixy.org/src/66/thumbs350/662694.jpg",
+                        //    ClubImageUrl = "https://resources.premierleague.com/premierleague/badges/t3.svg",
                         //    Founded = new DateTime(1886, 1, 1).Date,
                         //    City = "London"
                         //});
@@ -63,7 +63,7 @@ namespace FootballManager.API
                         //{
                         //    Id = 2,
                         //    ClubName = "Chelsea",
-                        //    ClubImageUrl = "https://pixy.org/src/62/thumbs350/620293.jpg",
+                        //    ClubImageUrl = "https://resources.premierleague.com/premierleague/badges/t8.svg",
                         //    Founded = new DateTime(1905, 3, 10).Date,
                         //    City = "London"
                         //});
@@ -72,7 +72,7 @@ namespace FootballManager.API
                         //{
                         //    Id = 1,
                         //    StadiumName = "Emirates Stadium",
-                        //    StadiumImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Emirates_Stadium_2009.jpg/1200px-Emirates_Stadium_2009.jpg", // photo from: https://commons.wikimedia.org/wiki/File:Emirates_Stadium_2009.jpg
+                        //    StadiumImageUrl = "https://resources.premierleague.com/premierleague/photo/2016/07/21/ccade424-00e6-4310-a183-48f7101b1f5e/Arsenal_Stadium_Emirates.jpeg",
                         //    Capacity = 60272,
                         //    ClubId = 1
                         //});
@@ -81,7 +81,7 @@ namespace FootballManager.API
                         //{
                         //    Id = 2,
                         //    StadiumName = "Stamford Bridge",
-                        //    StadiumImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Stamford_Bridge_%285987366308%29.jpg/1200px-Stamford_Bridge_%285987366308%29.jpg", // photo from: https://commons.wikimedia.org/wiki/File:Stamford_Bridge_(5987366308).jpg
+                        //    StadiumImageUrl = "https://resources.premierleague.com/premierleague/photo/2016/09/22/c9c78d39-60fb-47c6-9e20-837efb242ac5/Stamford_Bridge.jpg",
                         //    Capacity = 41798,
                         //    ClubId = 2
                         //});
