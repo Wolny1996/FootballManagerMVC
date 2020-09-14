@@ -9,10 +9,9 @@ body {
     margin: 0 !important;
     padding: 0;
     box-sizing: border-box;
-    background-image: url(../Images/Background.png) !important; /*photo from: */
+    background-image: url(../Images/Background.jpg) !important; /*photo from: https://papers.co/android/ */
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: bottom left !important;
 }
 
 #nav-container {
@@ -115,11 +114,18 @@ body {
     width: 500px;
     height: 500px;
     margin: 50px auto;
+    margin-bottom: 0px;
     padding: 0;
     float: left;
     background-color: #333;
     border-radius: 10px;
 }
+
+    #middle h5 {
+        color: #fff !important;
+        font-weight: 700;
+        text-align: center;
+    }
 
 #left {
     width: 250px;
@@ -127,11 +133,10 @@ body {
     margin: 40px auto;
     padding: 0;
     float: left;
-    background-image: url(../Images/PremierLeagueTrophy.jpg); /*photo from: https://commons.wikimedia.org/wiki/File:Trophée_Premier_League_13-14.jpg*/
+    background-image: url(../Images/PremierLeagueTrophy.jpg); /*photo from: https://www.premierleague.com */
     background-size: auto 520px;
     background-repeat: no-repeat;
-    /*    background-position-x: -425px;*/
-    background-position-x: -50px;
+    background-position-x: -220px;
     background-color: #000;
     border-radius: 10px;
     transform: perspective(500px) rotateY(10deg);
@@ -144,10 +149,10 @@ body {
     padding: 0;
     background-color: firebrick;
     float: left;
-    background-image: url(../Images/PremierLeagueBall.jpg); /*photo from: https://pixabay.com/pl/photos/piłki-piłkarz-premier-league-3597192/*/
+    background-image: url(../Images/PremierLeagueBall.jpg); /*photo from: https://www.premierleague.com */
     background-size: auto 520px;
     background-repeat: no-repeat;
-    background-position-x: -275px;
+    background-position-x: -185px;
     background-color: #000;
     border-radius: 10px;
     transform: perspective(500px) rotateY(-10deg);
@@ -156,13 +161,18 @@ body {
 #carousel-container {
     width: 500px;
     height: 500px;
+    padding-top: 100px;
 }
 
-.carousel-inner {
+.clubs-carousel {
+    width: 500px;
+    height: 300px;
+}
+
+.item img {
+    height: 300px !important;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
-    width: 300px !important;
 }
 
 #clubs-thumbnails-container {
