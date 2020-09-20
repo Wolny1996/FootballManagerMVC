@@ -182,8 +182,8 @@ body {
 }
 
 .club-thumbnail {
-    width: 100px;
-    height: 85px;
+    width: 96px;
+    height: 120px;
     float: left;
 }
 
@@ -200,6 +200,8 @@ body {
 
     .club-thumbnail h5 {
         text-align: center;
+        margin-top: 1px;
+        margin-bottom: 4px;
         color: #fff;
     }
 
