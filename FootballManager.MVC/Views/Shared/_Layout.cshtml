@@ -22,6 +22,7 @@
                 <ol>
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Clubs" asp-action="GetAllClubs">Clubs</a></li>
+                    <partial name="_LoginPartial" />
                 </ol>
             </div>
 
@@ -46,11 +47,14 @@
         <div id="middle">
             <main>
                 @RenderBody()
-                <aside><h5>Images from: https://www.premierleague.com</h5></aside>
-                <aside><h5>Background image from: https://papers.co/desktop/</h5></aside>
             </main>
+            <aside class="resources-sources">
+                <h5>Images from: https://www.premierleague.com</h5>
+                <h5>Background image from: https://papers.co/desktop/</h5>
+            </aside>
         </div>
         <asside id="right"></asside>
     </div>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
