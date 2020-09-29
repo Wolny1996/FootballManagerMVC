@@ -14,6 +14,7 @@ body {
     background-repeat: no-repeat;
 }
 
+/*<-- navigation section -->*/
 #nav-container {
     width: 100%;
     height: 60px;
@@ -103,6 +104,7 @@ body {
     height: 60px;
 }
 
+/*<-- homepage section -->*/
 #wrapper {
     width: 1000px;
     height: 800px;
@@ -126,6 +128,12 @@ body {
         font-weight: 700;
         text-align: center;
     }
+
+.resources-sources {
+    width: 500px;
+    height: 60px;
+    float: left;
+}
 
 #left {
     width: 250px;
@@ -175,6 +183,7 @@ body {
     margin-right: auto;
 }
 
+/*<-- All clubs section -->*/
 #clubs-thumbnails-container {
     width: 480px;
     height: 480px;
@@ -209,6 +218,7 @@ body {
         text-decoration: none !important;
     }
 
+/*<-- Specific club section -->*/
 .club-container {
     width: 480px;
     height: 480px;
@@ -305,3 +315,12 @@ body {
         padding: 5px;
         color: #fff;
     }
+
+/*<-- Customer panel section -->*/
+.customer-panel-container {
+    width: 480px;
+    height: 480px;
+    float: left;
+    margin: 10px;
+    color: #fff;
+}

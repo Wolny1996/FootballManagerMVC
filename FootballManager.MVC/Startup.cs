@@ -5,6 +5,7 @@ using FootballManager.Data.Repositories;
 using FootballManager.Data.Repositories.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ namespace FootballManager.API
             services.AddDbContext<FootballManagerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(FootballManagerContext)))
                     .EnableSensitiveDataLogging());
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<FootballManagerContext>();
             services.AddSwaggerGen();
             services.AddMvc().AddFluentValidation();
             
@@ -55,6 +57,7 @@ namespace FootballManager.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

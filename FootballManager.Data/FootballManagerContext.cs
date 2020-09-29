@@ -1,9 +1,11 @@
 ﻿using FootballManager.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FootballManager.Data
 {
-    public partial class FootballManagerContext : DbContext
+    public partial class FootballManagerContext : IdentityDbContext<IdentityUser>
     {
         public FootballManagerContext()
         {
@@ -50,6 +52,7 @@ namespace FootballManager.Data
                     .HasForeignKey<Stadium>(d => d.ClubId);
             });
 
+            base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
